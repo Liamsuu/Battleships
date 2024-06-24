@@ -16,7 +16,7 @@ describe("Creation of gameboard and methods", () => {
     const game = new Gameboard();
     expect(() => {
       game.setShipPosition(0, 6, "horizontal", 5);
-    }).toThrow("Invalid position");
+    }).toThrow(/^Invalid position$/);
   });
 
   test("Positions vertical pieces correctly", () => {
@@ -33,13 +33,26 @@ describe("Creation of gameboard and methods", () => {
     const game = new Gameboard();
     expect(() => {
       game.setShipPosition(0, 0, "vertical", 5);
-    }).toThrow("Invalid position");
+    }).toThrow(/^Invalid position$/);
   });
 
   test("Incorrect direction handles error", () => {
     const game = new Gameboard();
     expect(() => {
       game.setShipPosition(0, 0, "wrongdirection", 5);
-    }).toThrow("Invalid direction(horizontal or vertical).");
+    }).toThrow(/^Invalid direction$/);
+  });
+
+  test("Handles position already taken correctly", () => {
+    const game = new Gameboard();
+    game.setShipPosition(4, 0, "vertical", 3);
+    expect(() => {
+      game.setShipPosition(5, 0, "vertical", 3);
+    }).toThrow(/^Position taken$/);
+    const newGame = new Gameboard();
+    newGame.setShipPosition(4, 0, "horizontal", 5);
+    expect(() => {
+      newGame.setShipPosition(4, 4, "horizontal", 3);
+    }).toThrow(/^Position taken$/);
   });
 });
