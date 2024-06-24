@@ -12,5 +12,15 @@ export default class Node {
     this.shipObjPresent = shipObj;
   }
 
-  setHit() {}
+  setHit() {
+    // sets location as hit, and adds a hit to a ship if present
+    if (this.isShipPresent() !== null) {
+      this.isShipPresent().hit();
+    }
+    this.hit = true;
+  }
+
+  isHit() {
+    return this.hit;
+  }
 }

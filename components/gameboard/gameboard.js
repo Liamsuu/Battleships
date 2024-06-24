@@ -262,4 +262,8 @@ export default class Gameboard {
       throw "Invalid direction";
     }
   }
+
+  receiveAttack(posX, posY) {
+    this.gameboard[posX][posY].setHit();
+  }
 }

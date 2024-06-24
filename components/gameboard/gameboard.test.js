@@ -55,4 +55,13 @@ describe("Creation of gameboard and methods", () => {
       newGame.setShipPosition(4, 4, "horizontal", 3);
     }).toThrow(/^Position taken$/);
   });
+
+  test("Correctly hits ships and marks position as hit", () => {
+    const game = new Gameboard();
+    game.setShipPosition(6, 5, "vertical", 3);
+    expect(game.gameboard[6][5].isShipPresent().getHits()).toBe(0);
+    game.receiveAttack(6, 5);
+    expect(game.gameboard[6][5].isShipPresent().getHits()).toBe(1);
+    expect(game.gameboard[6][5].isHit()).toBe(true);
+  });
 });
