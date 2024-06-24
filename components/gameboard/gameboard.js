@@ -127,6 +127,30 @@ export default class Gameboard {
     ];
   }
 
+  getShipPositions() {
+    let positions = [];
+    this.gameboard.forEach(function callback(innerArr, arrIndex) {
+      innerArr.forEach(function callback(node, nodeIndex) {
+        if (node.isShipPresent() !== null) {
+          positions.push([arrIndex, nodeIndex]);
+        }
+      });
+    });
+    return positions;
+  }
+
+  getHitPositions() {
+    let positions = [];
+    this.gameboard.forEach(function callback(innerArr, arrIndex) {
+      innerArr.forEach(function callback(node, nodeIndex) {
+        if (node.isHit() === true) {
+          positions.push([arrIndex, nodeIndex]);
+        }
+      });
+    });
+    return positions;
+  }
+
   checkPosTaken(posX, posY, len, direction) {
     switch (direction) {
       case "horizontal":
