@@ -266,4 +266,22 @@ export default class Gameboard {
   receiveAttack(posX, posY) {
     this.gameboard[posX][posY].setHit();
   }
+
+  allShipsSunk() {
+    // iterate through the array
+    for (let array of this.gameboard) {
+      // iterate through the inside array
+      for (let node of array) {
+        // if node contains ship a ship
+        if (node.isShipPresent() !== null) {
+          // if the ship is not sunk, not all ships are sunk
+          if (!node.isShipPresent().isSunk()) {
+            return false;
+          }
+        }
+      }
+    }
+    // after checking all of them, if it reaches here they have all been sunk
+    return true;
+  }
 }

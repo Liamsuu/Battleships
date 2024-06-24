@@ -64,4 +64,14 @@ describe("Creation of gameboard and methods", () => {
     expect(game.gameboard[6][5].isShipPresent().getHits()).toBe(1);
     expect(game.gameboard[6][5].isHit()).toBe(true);
   });
+
+  test("Correctly returns if all ships on gameboard are sunk", () => {
+    const game = new Gameboard();
+    game.setShipPosition(6, 5, "vertical", 3);
+    expect(game.allShipsSunk()).toBe(false);
+    game.receiveAttack(6, 5);
+    game.receiveAttack(5, 5);
+    game.receiveAttack(4, 5);
+    expect(game.allShipsSunk()).toBe(true);
+  });
 });
