@@ -2,6 +2,7 @@ import Player from "../components/player/player";
 import "./index.css";
 import renderBoard from "../components/UI/renderBoard";
 import createDataPos from "../components/UI/positionData";
+import inititializeBoardClicks from "../components/UI/eventListeners";
 
 const userPlayer = new Player(true);
 const botPlayer = new Player(false);
@@ -19,6 +20,8 @@ for (let loops = 0; loops < 100; loops++) {
 }
 
 renderBoard(usersUI, userPlayer.playerBoard);
+const userDivs = usersUI.querySelectorAll("div");
+inititializeBoardClicks(userPlayer, usersUI, userDivs);
 
 // update bots UI to match gameboard
 const botsUI = document.querySelector("#bot-content");
@@ -26,3 +29,7 @@ for (let loops = 0; loops < 100; loops++) {
   botsUI.appendChild(createDataPos(loops));
 }
 renderBoard(botsUI, botPlayer.playerBoard);
+
+// event listener to enemies board for clicks
+const botDivs = botsUI.querySelectorAll("div");
+inititializeBoardClicks(botPlayer, botsUI, botDivs);
