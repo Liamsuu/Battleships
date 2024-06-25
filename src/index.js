@@ -1,5 +1,7 @@
 import Player from "../components/player/player";
 import "./index.css";
+import renderBoard from "../components/UI/renderBoard";
+import createDataPos from "../components/UI/positionData";
 
 const userPlayer = new Player(true);
 const botPlayer = new Player(false);
@@ -12,6 +14,15 @@ botPlayer.playerBoard.setShipPosition(0, 4, "horizontal", 2);
 userPlayer.playerBoard.setShipPosition(9, 5, "vertical", 3);
 // update user UI to match gameboard
 const usersUI = document.querySelector("#player-content");
+for (let loops = 0; loops < 100; loops++) {
+  usersUI.appendChild(createDataPos(loops));
+}
+
+renderBoard(usersUI, userPlayer.playerBoard);
 
 // update bots UI to match gameboard
 const botsUI = document.querySelector("#bot-content");
+for (let loops = 0; loops < 100; loops++) {
+  botsUI.appendChild(createDataPos(loops));
+}
+renderBoard(botsUI, botPlayer.playerBoard);
