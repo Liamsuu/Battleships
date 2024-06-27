@@ -24,3 +24,11 @@ body {
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
 }
+
+#player-content div,
+#bot-content div {
+  display: flex;
+  border: 1px solid black;
+  align-items: center;
+  justify-content: center;
+}
