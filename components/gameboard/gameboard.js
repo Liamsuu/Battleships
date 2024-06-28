@@ -127,11 +127,8 @@ export default class Gameboard {
     ];
   }
 
-  randomiseBoard() {
-    const directions = ["horizontal", "vertical"];
-    const positions = [];
-
-    // push all positions to arr
+  allPositions() {
+    let positions = [];
     for (let x = 0; x < 100; x++) {
       if (x < 10) {
         positions.push([0, x]);
@@ -155,6 +152,13 @@ export default class Gameboard {
         positions.push([9, x % 10]);
       }
     }
+    return positions;
+  }
+
+  randomiseBoard() {
+    const directions = ["horizontal", "vertical"];
+    const positions = this.allPositions();
+
     for (let x = 0; x < 5; x++) {
       const lengths = Math.floor(Math.random() * (5 - 2 + 1) + 2); // generate random length between 2 and 5
       try {
