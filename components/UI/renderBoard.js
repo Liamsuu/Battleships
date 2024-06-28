@@ -6,7 +6,7 @@ export default function renderBoard(contentBox, gameboardObj) {
   // when restart is clicked all boxes should be blank
   const contentGrids = contentBox.querySelectorAll("div");
   contentGrids.forEach((box) => {
-    box.style.backgroundColor = "red"; // change this after to whatever permanent main colour will be
+    box.style.backgroundColor = "#d1d5db";
     box.textContent = ""; // if theres text remove it
   });
 
@@ -19,7 +19,7 @@ export default function renderBoard(contentBox, gameboardObj) {
       );
       // only hit positions with a ship will show blue so player cant cheat
       if (botPlayer.playerBoard.gameboard[posArr[0]][posArr[1]].isHit()) {
-        currentPosDiv.style.backgroundColor = "blue";
+        currentPosDiv.style.backgroundColor = "#71717a";
       }
     });
   } else {
@@ -31,7 +31,7 @@ export default function renderBoard(contentBox, gameboardObj) {
         `[data-position='${posArr.toString()}']`
       );
 
-      currentPosDiv.style.backgroundColor = "blue";
+      currentPosDiv.style.backgroundColor = "#71717a";
     });
   }
 
