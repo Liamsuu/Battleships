@@ -127,6 +127,63 @@ export default class Gameboard {
     ];
   }
 
+  randomiseBoard() {
+    const directions = ["horizontal", "vertical"];
+    const positions = [];
+
+    // push all positions to arr
+    for (let x = 0; x < 100; x++) {
+      if (x < 10) {
+        positions.push([0, x]);
+      } else if (x >= 10 && x < 20) {
+        positions.push([1, x % 10]);
+      } else if (x >= 20 && x < 30) {
+        positions.push([2, x % 10]);
+      } else if (x >= 30 && x < 40) {
+        positions.push([3, x % 10]);
+      } else if (x >= 40 && x < 50) {
+        positions.push([4, x % 10]);
+      } else if (x >= 50 && x < 60) {
+        positions.push([5, x % 10]);
+      } else if (x >= 60 && x < 70) {
+        positions.push([6, x % 10]);
+      } else if (x >= 70 && x < 80) {
+        positions.push([7, x % 10]);
+      } else if (x >= 80 && x < 90) {
+        positions.push([8, x % 10]);
+      } else if (x >= 90 && x < 100) {
+        positions.push([9, x % 10]);
+      }
+    }
+    for (let x = 0; x < 5; x++) {
+      const lengths = Math.floor(Math.random() * (5 - 2 + 1) + 2); // generate random length between 2 and 5
+      try {
+        const randomPosition =
+          positions[Math.floor(Math.random() * positions.length)];
+        const randomDirection =
+          directions[Math.floor(Math.random() * directions.length)];
+        this.setShipPosition(
+          randomPosition[0],
+          randomPosition[1],
+          randomDirection,
+          lengths
+        );
+      } catch (error) {
+        // error is likely position is taken so just redo that random selection
+        console.log(error);
+        x -= 1; // redo loop
+      }
+    }
+  }
+
+  resetBoard() {
+    this.gameboard.forEach((childArr) => {
+      childArr.forEach((node) => {
+        childArr.splice(childArr.indexOf(node), 1, new Node());
+      });
+    });
+  }
+
   getShipPositions() {
     let positions = [];
     this.gameboard.forEach(function callback(innerArr, arrIndex) {

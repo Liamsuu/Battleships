@@ -12,11 +12,11 @@ const userPlayer = new Player(true);
 const botPlayer = new Player(false);
 
 // fill out users gameboard
-userPlayer.playerBoard.setShipPosition(0, 8, "horizontal", 2);
-userPlayer.playerBoard.setShipPosition(4, 5, "vertical", 3);
+userPlayer.playerBoard.randomiseBoard();
+
 // fill out bots gameboard
-botPlayer.playerBoard.setShipPosition(0, 4, "horizontal", 2);
-userPlayer.playerBoard.setShipPosition(9, 5, "vertical", 3);
+botPlayer.playerBoard.randomiseBoard();
+
 // update user UI to match gameboard
 const usersContent = document.querySelector("#player-content");
 for (let loops = 0; loops < 100; loops++) {
@@ -40,7 +40,6 @@ const botDivs = botsContent.querySelectorAll("div");
 const botUI = new UserInterface();
 botUI.inititializeBoardClicks(botPlayer, botsContent, botDivs);
 
-resetBtn.addEventListener(
-  "click",
-  resetGame(userPlayer, usersContent, botPlayer, botsContent)
-);
+resetBtn.addEventListener("click", () => {
+  resetGame(userPlayer, usersContent, botPlayer, botsContent);
+});
