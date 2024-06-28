@@ -5,7 +5,6 @@ import createDataPos from "../components/UI/positionData";
 import UserInterface from "../components/UI/eventListeners";
 import resetGame from "../components/UI/reset";
 const resetBtn = document.querySelector("#restart-btn");
-const randomiseBtn = document.querySelector("#random-btn");
 
 export const userPlayer = new Player(true);
 export const botPlayer = new Player(false);

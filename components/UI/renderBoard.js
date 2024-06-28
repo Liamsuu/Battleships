@@ -1,3 +1,4 @@
+import { botPlayer } from "../../src";
 export default function renderBoard(contentBox, gameboardObj) {
   const shipPos = gameboardObj.getShipPositions();
   const hitPos = gameboardObj.getHitPositions();
@@ -9,16 +10,30 @@ export default function renderBoard(contentBox, gameboardObj) {
     box.textContent = ""; // if theres text remove it
   });
 
-  // iterate through shipPos
-  shipPos.forEach((posArr) => {
-    // inside each array, turn them into string e.g: '0,1'
-    // query select contentBox for the element with data-position of whatever the string position is now color blue
-    const currentPosDiv = contentBox.querySelector(
-      `[data-position='${posArr.toString()}']`
-    );
+  if (botPlayer.playerBoard === gameboardObj) {
+    shipPos.forEach((posArr) => {
+      // inside each array, turn them into string e.g: '0,1'
+      // query select contentBox for the element with data-position of whatever the string position is now color blue
+      const currentPosDiv = contentBox.querySelector(
+        `[data-position='${posArr.toString()}']`
+      );
+      // only hit positions with a ship will show blue so player cant cheat
+      if (botPlayer.playerBoard.gameboard[posArr[0]][posArr[1]].isHit()) {
+        currentPosDiv.style.backgroundColor = "blue";
+      }
+    });
+  } else {
+    // iterate through shipPos
+    shipPos.forEach((posArr) => {
+      // inside each array, turn them into string e.g: '0,1'
+      // query select contentBox for the element with data-position of whatever the string position is now color blue
+      const currentPosDiv = contentBox.querySelector(
+        `[data-position='${posArr.toString()}']`
+      );
 
-    currentPosDiv.style.backgroundColor = "blue";
-  });
+      currentPosDiv.style.backgroundColor = "blue";
+    });
+  }
 
   hitPos.forEach((posArr) => {
     // inside each array, turn them into string e.g: '0,1'
